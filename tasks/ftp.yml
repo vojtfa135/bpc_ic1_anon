@@ -10,8 +10,8 @@
     port: "{{ item }}"
     proto: tcp
   loop:
-    - 20
-    - 21
+    - "20"
+    - "21"
 
 - name: Start and enable ftp
   systemd:

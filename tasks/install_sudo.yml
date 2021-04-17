@@ -17,7 +17,7 @@
 
 - name: Decompress sudo tar file
   unarchive:
-    src: "{{ sudo_src }}/SUDO_1_9_5.tar.gz"
+    src: "{{ sudo_src }}/sudo-SUDO_1_9_5.tar.gz"
     dest: "{{ sudo_src }}"
 
 - name: Configure sudo source
