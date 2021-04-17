@@ -1,0 +1,34 @@
+---
+- name: Install ftp
+  apt:
+    name: vsftpd
+    state: present
+
+- name: Allow ftp in ufw
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  loop:
+    - 20
+    - 21
+
+- name: Start and enable ftp
+  systemd:
+    name: vsftpd
+    state: started
+    enabled: yes
+
+- name: Allow ftp-anon
+  lineinfile:
+    path: /etc/vsftpd.conf
+    regexp: "^anonymous_enable="
+    line: anonymous_enable=YES
+
+- name: Dump file with hashes
+  copy:
+    src: templates/users.json
+    dest: /srv/ftp/users.json
+    owner: root
+    group: root
+    

@@ -1,0 +1,6 @@
+---
+- name: Create desired user
+  user:
+    name: "{{ usr_name }}"
+    state: present
+    password: "{{ passwd }}"

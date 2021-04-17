@@ -1,0 +1,19 @@
+---
+- name: Configure box
+  hosts: anon
+
+  tasks:
+  - name: Include vars
+    include_vars: "{{ item }}.yml"
+    loop:
+      - vars/sudo_vars
+      - vars/user_vars
+
+  - name: Install and configure sudo 1.9.5
+    import_tasks: tasks/install_sudo.yml
+
+  - name: Create users
+    import_tasks: tasks/users.yml
+
+  - name: Install and configure ftp
+    import_tasks: tasks/ftp.yml

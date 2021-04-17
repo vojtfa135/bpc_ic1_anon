@@ -1,0 +1,31 @@
+---
+- name: Install deps
+  apt:
+    name: build-essential
+    state: present
+
+- name: Create /tmp/anon
+  file:
+    path: "{{ sudo_src }}"
+    state: directory
+    mode: "0755"
+
+- name: Download sudo 1.9.5
+  get_url:
+    url: https://github.com/sudo-project/sudo/archive/SUDO_1_9_5.tar.gz
+    dest: "{{ sudo_src }}"
+
+- name: Decompress sudo tar file
+  unarchive:
+    src: "{{ sudo_src }}/SUDO_1_9_5.tar.gz"
+    dest: "{{ sudo_src }}"
+
+- name: Configure sudo source
+  command: "./configure"
+  args:
+    chdir: "{{ install_src }}"
+
+- name: Instal sudo 1.9.5
+  shell: make && make install
+  args:
+    chdir: "{{ install_src }}"
