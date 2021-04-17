@@ -25,6 +25,11 @@
     regexp: "^anonymous_enable="
     line: anonymous_enable=YES
 
+- name: Restart ftp after conf changes
+  systemd:
+    name: vsftpd
+    state: restarted
+
 - name: Dump file with hashes
   copy:
     src: templates/users.json
