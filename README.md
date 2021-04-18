@@ -1,7 +1,7 @@
 # BPC-ICT1 ANON PROJECT 2021
 
 ## How to run
-Insert hot ip into inventory file
+Insert host ip into inventory file
 ```shell
 [anon]
 some ip
