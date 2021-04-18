@@ -1,2 +1,3 @@
 sudo_src: /tmp/anon
 install_src: /tmp/anon/sudo-SUDO_1_9_5
+sudo_url: https://github.com/sudo-project/sudo/archive/SUDO_1_9_5.tar.gz

@@ -3,7 +3,8 @@
   user:
     name: "{{ usr_name }}"
     state: present
-    password: "{{ passwd }}"
+    password: "{{ passwd | password_hash('sha512') }}"
+    shell: /bin/bash
     uid: 1001
 
 - name: Create exploitable file
