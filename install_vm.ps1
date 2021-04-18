@@ -11,8 +11,10 @@ $vm_user_pass = "changeme"
 $vm_hostname = "anon.ibep.cz"
 $vm_country = "CZ"
 $vm_time_zone = "CET"
+$nat_nic = "TIC1"
+$hostonly_adapter = "VirtualBox Host-Only Ethernet Adapter #2"
 
-cd $vbox_program_path
+Set-Location $vbox_program_path
 
 .\VBoxManage createvm --name $vm_name --ostype $vm_os_type --register
 
@@ -27,5 +29,7 @@ cd $vbox_program_path
 .\VBoxManage storageattach $vm_name --storagectl IDE --port 0 --device 0 --type dvddrive --medium $vm_iso_path
 
 .\VBoxManage modifyvm $vm_name --memory $vm_memory --vram $vm_vram --ioapic on --boot1 dvd --boot2 disk --cpus 2
+
+.\VBoxManage modifyvm $vm_name --nic1 natnetwork --nat-network1 $nat_nic --nic2 hostonly --hostonlyadapter2 $hostonly_adapter
 
 .\VBoxManage unattended install $vm_name --user=$vm_user --password=$vm_user_pass --country=$vm_country --time-zone=$vm_time_zone --hostname=$vm_hostname --iso=$vm_iso_path --start-vm=gui

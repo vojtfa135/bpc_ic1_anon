@@ -4,3 +4,16 @@
     name: "{{ usr_name }}"
     state: present
     password: "{{ passwd }}"
+    uid: 1001
+
+- name: Create exploitable file
+  file:
+    path: "{{ exploitable }}"
+    state: touch
+    owner: root
+    group: root
+
+- name: Create sudoedit rule for the desired user
+  lineinfile:
+    path: /etc/sudoers
+    line: "%{{ usr_name }} ALL = sudoedit {{ exploitable }}"
